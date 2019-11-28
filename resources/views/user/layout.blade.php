@@ -7,23 +7,27 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="../../favicon.ico">
-        <title>Admin System</title>
+        <title>User</title>
         <link href="{{asset('theme_admin/css/bootstrap.min.css')}}" rel="stylesheet">
          <link href="{{asset('theme_admin/css/test.css')}}" rel="stylesheet">
         
         <link href="{{asset('theme_admin/css/dashboard.css')}}" rel="stylesheet">
         
         <script src="https://kit.fontawesome.com/ae67b41446.js" crossorigin="anonymous"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <style type="text/css">
+          h1{font-size: 31px;}
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Xin chào {{get_data_user('admins','name')}}</a>
+                    <a class="navbar-brand" href="{{route('home')}}">HOME</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{route('admin.logout')}}">Đăng xuất</a></li>
+                        <li><a href="{{route('get.logout.user')}}" title="Đăng xuất">Đăng xuất</a></li>
                     </ul>
                 </div>
             </div>
@@ -32,21 +36,16 @@
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li class="{{\Request::route()->getName() == 'admin.home' ? 'active' : ''}}"><a href="{{route('admin.home')}}">Trang Tổng Quan</a></li>
-                        <li class="{{\Request::route()->getName() == 'admin.get.list.category' ? 'active' : ''}}"><a href="{{route('admin.get.list.category')}}">Danh mục</a></li>
-                        <li class="{{\Request::route()->getName() == 'admin.get.list.product' ? 'active' : ''}}"><a href="{{route('admin.get.list.product')}}">Sản phẩm</a></li>
-                        <li class="{{\Request::route()->getName() == 'admin.get.list.rating' ? 'active' : ''}}"><a href="{{route('admin.get.list.rating')}}">Đánh giá</a></li>
-                        <li class="{{\Request::route()->getName() == 'admin.get.list.article' ? 'active' : ''}}"><a href="{{route('admin.get.list.article')}}">Tin tức</a></li>
-                        <li class="{{\Request::route()->getName() == 'admin.get.list.transaction' ? 'active' : ''}}"><a href="{{route('admin.get.list.transaction')}}">Đơn hàng</a></li>
-                         <li class="{{\Request::route()->getName() == 'admin.get.warehouse.list' ? 'active' : ''}}"><a href="{{route('admin.get.warehouse.list')}}">Kho hàng</a></li>
-                        <li class="{{\Request::route()->getName() == 'admin.get.list.user' ? 'active' : ''}}"><a href="{{route('admin.get.list.user')}}">Thành viên</a></li>
-                        <li class="{{\Request::route()->getName() == 'admin.get.list.contact' ? 'active' : ''}}"><a href="{{route('admin.get.list.contact')}}">Liên hệ</a></li>
-                         <li class="{{\Request::route()->getName() == 'admin.get.list.page_static' ? 'active' : ''}}"><a href="{{route('admin.get.list.page_static')}}">Page Tĩnh</a></li>
-                         <li class="{{\Request::route()->getName() == 'admin.get.list.authenticate' ? 'active' : ''}}"><a href="{{route('admin.get.list.authenticate')}}">Admin</a></li>
-                         <li class="{{\Request::route()->getName() == 'admin.get.update.password.authenticate' ? 'active' : ''}}"><a href="{{route('admin.get.update.password.authenticate')}}">Cập nhật mật khẩu</a></li>
+                        <li class="{{\Request::route()->getName() == 'user.dashboard' ? 'active' : ''}}"><a href="{{route('user.dashboard')}}">Trang Tổng Quan</a></li>
+                        <li class="{{\Request::route()->getName() == 'user.update.info' ? 'active' : ''}}"><a href="{{route('user.update.info')}}">Cập nhật thông tin</a></li>
+                        <li class="{{\Request::route()->getName() == 'user.update.password' ? 'active' : ''}}"><a href="{{route('user.update.password')}}">Cập nhật mật khẩu</a></li>
+                        <li class="{{\Request::route()->getName() == 'user.care.product' ? 'active' : ''}}"><a href="{{route('user.care.product')}}">Sản phẩm vừa xem</a></li>
+                        <li class="{{\Request::route()->getName() == 'user.list.product' ? 'active' : ''}}"><a href="{{route('user.list.product')}}">Sản phẩm bán chạy</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                     <a class="navbar-brand" href="#" style="margin-left: 45px;font-size: 22px;color: #dc4b2b;">{{get_data_user('web','name')}}</a>
+                     <br><br><br>
                     @if(Session::has('success'))
                     <div class="alert alert-success alert-dismissible" style="position: fixed; right: 20px; z-index: 999999;">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

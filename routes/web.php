@@ -12,9 +12,13 @@ Route::group(['namespace' => 'Auth'],function(){
 	Route::post('dang-nhap','LoginController@postLogin')->name('post.login');
 	//dang xuat
 	Route::get('dang-xuat','LoginController@postLogout')->name('get.logout.user');
+	//lay lai mat khau 
+	Route::get('/lay-lai-mat-khau','ForgotPasswordController@getFormResetPassword')->name('get.reset.password');
+	Route::post('/lay-lai-mat-khau','ForgotPasswordController@sendCodeResetPassword');
 });
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('danh-muc/{slug}-{id}','CategoryController@getListProduct')->name('get.list.product');
+Route::get('san-pham','CategoryController@getListProduct')->name('get.product.list');
 Route::get('san-pham/{slug}-{id}','ProductDetailController@productDetail')->name('get.detail.product');
 
 // bai viet
@@ -55,3 +59,13 @@ Route::get('thong-tin-giao-hang','PageStaticController@infoShopping')->name('get
 Route::get('chinh-sach-bao-mat','PageStaticController@security')->name('get.security');
 Route::get('dieu-khoan-su-dung','PageStaticController@rules')->name('get.rules');
 
+//phan user
+Route::group(['prefix' => 'user', 'middleware' => 'CheckLoginUser'], function(){
+	Route::get('/','UserController@index')->name('user.dashboard');
+	Route::get('/info','UserController@updateInfo')->name('user.update.info');
+	Route::post('/info','UserController@saveUpdateInfo');
+	Route::get('/password','UserController@updatePassword')->name('user.update.password');
+	Route::post('/password','UserController@saveUpdatePassword');
+	Route::get('/san-pham-ban-chay','UserController@getListProduct')->name('user.list.product');
+	Route::get('/san-pham-quan-tam','UserController@getProductCare')->name('user.care.product');
+});

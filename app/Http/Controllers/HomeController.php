@@ -58,7 +58,7 @@ class HomeController extends FrontendController
     {
         if ($request->ajax()) {
             $listID = $request->id;
-            $products = Product::whereIn('id',$listID)->orderBy('id','desc')->limit(4)->get();
+            $products = Product::whereIn('id',$listID)->limit(4)->orderBy('id','desc')->get();
             //Phương thức whereIn kiểm tra giá trị của cột nằm trong một mảng id listID
             $html = view('components.product_view',compact('products'))->render();
             //render() returns the string contents of the view. It is also used inside the class' __toString() method which allows you to echo a View object.

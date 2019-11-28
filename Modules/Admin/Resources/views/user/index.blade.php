@@ -35,11 +35,10 @@
                         {{$user->phone}}
                     </td>
                     <td>
-                        <img src="{{pare_url_file($user->pro_avatar)}}" class="img img-responsive" style="width: 80px; height: 80px;" alt="">
+                        <img src="{{pare_url_file($user->avatar)}}" class="img img-responsive" style="width: 80px; height: 80px;" alt="">
                         {{-- pare_url_file trong ham helper/function.php --}}
                     </td>
                     <td>
-                        <a style="padding: 5px 10px;border: 1px solid #999; font-size: 12px;" href=""><i class="fas fa-edit" style="font-size: 11px;" ></i> Cập nhật</a>
                         <a style="padding: 5px 10px;border: 1px solid #999; font-size: 12px;" href="{{route('admin.action.user',['delete',$user->id])}}"><i class="fas fa-trash-alt" style="font-size: 11px;"></i> Xóa</a>
                     </td>
                 </tr>

@@ -19,6 +19,8 @@ Route::group(['prefix' =>'authenticate'],function(){
    Route::post('/create','AdminAuthCotrollerController@store');
    Route::get('/update/{id}','AdminAuthCotrollerController@edit')->name('admin.get.edit.authenticate');
    Route::post('/update/{id}','AdminAuthCotrollerController@update');
+   Route::get('/password','AdminAuthCotrollerController@updatePasswordAdmin')->name('admin.get.update.password.authenticate');
+   Route::post('password','AdminAuthCotrollerController@savePasswordAdmin');
    Route::get('{action}/{id}','AdminAuthCotrollerController@action')->name('admin.get.action.authenticate');
 });
 
@@ -84,6 +86,10 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function() {
         Route::post('/create','AdminPageStaticController@store');
         Route::get('/update/{id}','AdminPageStaticController@edit')->name('admin.get.edit.page_static');
         Route::post('/update/{id}','AdminPageStaticController@update');
-    });    
+    }); 
+       //kho hang
+      Route::group(['prefix' => 'warehouse'],function(){
+          Route::get('/','AdminWarehouseController@getWarehouseProduct')->name('admin.get.warehouse.list');
+      });
 });
 

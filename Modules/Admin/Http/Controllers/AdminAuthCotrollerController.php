@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Http\Requests\RequestPassword;
+use Illuminate\Support\Facades\Hash;
 class AdminAuthCotrollerController extends Controller
 {
    public function getLogin()
@@ -31,7 +33,7 @@ class AdminAuthCotrollerController extends Controller
    }
   public function index()
   {
-    $authenticates = Admin::select('id','email','phone','name')->get();
+    $authenticates = Admin::select('id','email','phone','name','avatar')->get();
     $viewData = [
       'authenticates' => $authenticates
     ];
@@ -58,12 +60,21 @@ class AdminAuthCotrollerController extends Controller
   }
   public function insertOrUpdate($request, $id='')
   {
+
     $authenticates = new Admin();
     if($id) $authenticates = Admin::find($id);
-    $authenticates->name = $request->name;
+    $authenticates->name = $request->names;
     $authenticates->email = $request->email;
     $authenticates->phone = $request->phone;
-    $authenticates->password = bcrypt($request->password);
+    //dd($request->hasFile('avatars'));
+    if ($request->hasFile('avatar')) 
+      {
+        $file = upload_image('avatar');
+        if(isset($file['name']))
+        {
+          $authenticates->avatar = $file['name'];
+        }
+      }
     $authenticates->save();
   }
   public function action($action,$id)
@@ -78,4 +89,19 @@ class AdminAuthCotrollerController extends Controller
     }
     return redirect()->back()->with('success','Xóa thành công');
   }
+  public function updatePasswordAdmin()
+  {
+    return view('admin::signup.password');
+  }
+  public function savePasswordAdmin(RequestPassword $requestPassword)
+    {
+      if(Hash::check($requestPassword->password_old,get_data_user('admins','password')))
+      {
+        $admin = Admin::find(get_data_user('admins'));
+        $admin->password = bcrypt($requestPassword->password_new);
+        $admin->save();
+        return redirect()->back()->with('success','Cập nhật thành công');
+      }
+      return redirect()->back()->with('danger','Mật khẩu củ không đúng');
+    }
 }

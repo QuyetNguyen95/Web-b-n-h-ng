@@ -19,10 +19,10 @@
                               <div class="single-product first-sale" >
                                  <div class="product-img" style="margin-bottom: 25px;">
                                     @if($product->pro_number == 0)
-                                       <span style="position: absolute; background: #f28902; color: white; padding: 2px 6px; border-radius: 5px; font-size: 10px; z-index: 2;">Tạm hết hàng</span>
+                                       <span style="position: absolute; background: #f28902; color: white; padding: 2px 6px; border-radius: 5px; font-size: 10px; z-index: 2;" >Tạm hết hàng</span>
                                     @endif
                                     @if($product->pro_sale >0)
-                                       <span style=" position:absolute;background-image: linear-gradient(-90deg,#ec1f1f 0%,#ff9c00 100%);border-radius: 5px; padding: 2px 6px; color: white; font-size: 10px; right: 0; z-index: 2;">Giảm {{$product->pro_sale}}%</span>
+                                       <span style=" position:absolute;background-image: linear-gradient(-90deg,#ec1f1f 0%,#ff9c00 100%);border-radius: 5px; padding: 2px 6px; color: white; font-size: 10px; right: 0; z-index: 2;" >Giảm {{$product->pro_sale}}%</span>
                                     @endif
                                     <a href="{{route('get.detail.product',[$product->pro_slug,$product->id])}}">
                                     <img class="primary-image" src="{{pare_url_file($product->pro_avatar)}}" alt="" />

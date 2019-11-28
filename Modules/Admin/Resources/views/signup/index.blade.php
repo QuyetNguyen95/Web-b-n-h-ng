@@ -8,12 +8,13 @@
 		</ol>
 	</div>
 	<div class="table-responsive">
-	<h2>Quản lý Admin <a href="{{route('admin.get.create.authenticate')}}" class="pull-right"><i class="fas fa-plus-circle"></i></a></h2>
+	<h2>Danh sách Admin <a href="{{route('admin.get.create.authenticate')}}" class="pull-right"><i class="fas fa-plus-circle"></i></a></h2>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Tên admin</th>
+                <th>Hình ảnh</th>
                 <th>Email</th>
                 <th>Số điện thoại</th>
                 <th>Thao tác</th>
@@ -25,6 +26,9 @@
                     <tr>
                         <td>{{$authenticate->id}}</td>
                         <td>{{$authenticate->name}}</td>
+                        <td>
+                             <img src="{{pare_url_file($authenticate->avatar)}}" class="img img-responsive" style="width: 80px; height: 80px;" alt="">
+                        </td>
                         <td>{{$authenticate->email}}</td>
                         <td>{{$authenticate->phone}}</td>
                         <td>
