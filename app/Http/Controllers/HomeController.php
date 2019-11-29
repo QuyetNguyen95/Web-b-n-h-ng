@@ -20,7 +20,7 @@ class HomeController extends FrontendController
     		'pro_hot' => Product::HOT_ON,
     		'pro_active' => Product::STATUS_PUBLIC
     	])->limit(5)->get();
-        $articleNews = Article::orderBy('id','DESC')->limit(6)->get();
+        $articleNews = Article::where('a_hot',Article::HOT)->limit(3)->get();
 
         $categoriesHome = Category::with('products')->where('c_home',Category::HOME)->limit(3)->get();
         //kiem tra nguoi dung dang nhap

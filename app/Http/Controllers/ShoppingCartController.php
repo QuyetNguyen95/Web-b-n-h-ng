@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use App\Models\Order;
 use Cart;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
 class ShoppingCartController extends FrontendController
 {
      public function __construct()
@@ -40,12 +41,28 @@ class ShoppingCartController extends FrontendController
     	return redirect()->back()->with('success','Mua hàng thành công');
     }
     //danh sach gio hang
-    public function getListShoppingCart()
+    public function getListShoppingCart(Request $requests)
     {
+        
     	$products = Cart::content();
     	return view('shopping.index',compact('products'));
     }
-
+     public function getupdatecart($id,$idrow,$qty,$dk)
+    {
+       $product = Product::select('pro_number')->find($id);
+      if ($dk=='up' && $qty<$product->pro_number ) {
+         $qt = $qty+1;
+         Cart::update($idrow, $qt);
+         return redirect()->back();
+      } elseif ($dk=='down') {
+         $qt = $qty-1;
+         Cart::update($idrow, $qt);
+         return redirect()->back();
+      } else {
+         return redirect()->back()->with('warning','Sản phẩm đã hết hàng');
+      }
+    }
+    
     //thanh toan gio hang
     public function getFormPay()
     {

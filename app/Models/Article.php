@@ -11,6 +11,7 @@ class Article extends Model
     //$guarded = [''] cho phep tat ca cac thuoc tinh deu mass assignment
     // Lỗi bảo mật mass-assignment xảy ra khi một user truyền vào một tham số HTTP không mong muốn trong request, và tham số đó sẽ có thể thay đổi một column trong database mà bạn không ngờ tới.
     const HOT = 1;
+    const PUBLIC = 1;
     protected $status = [
         1 => [
             'name' => 'Public',

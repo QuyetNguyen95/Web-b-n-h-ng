@@ -10,7 +10,7 @@ class FrontendController extends Controller
 {
     public function __construct()
     {
-    	$categories = Category::all();
+    	$categories = Category::where('c_active',Category::STATUS_PUBLIC)->get();
         View::share('categories', $categories);
         //share a piece of data with all views , view::share thuong dat trong _construct or method boot
     }

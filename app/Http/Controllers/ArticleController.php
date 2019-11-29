@@ -12,7 +12,7 @@ class ArticleController extends FrontendController
     }
     public function getListArticle()
     {
-    	$articles = Article::orderBy('id','DESC')->simplePaginate(5);
+    	$articles = Article::where('a_active',Article::PUBLIC)->orderBy('id','DESC')->simplePaginate(5);
         $articleHot = Article::where('a_hot',Article::HOT)->get();
     	return view('article.index', compact('articles','articleHot'));
     }

@@ -142,16 +142,15 @@
       </div>
       <div class="col-md-12">
          <div class="single-product-tab">
-              <!-- Nav tabs -->
-            <ul class="details-tab">
-               <li class="active"><a href="" data-toggle="tab">Chi tiết sản phẩm</a></li>
-               <li class="#"><a href="" data-toggle="tab">Đánh giá</a></li>
-            </ul>
-              <!-- Tab panes -->
             <div class="tab-content">
                <div role="tabpanel" class="tab-pane active" id="home">
                   <div class="product-tab-content">
-                     <p>{!!$productDetail->pro_content!!}</p>  
+                     <div id="collapseTwo" class="accordion-body collapse">
+                      <div class="accordion-inner">                        
+                          <p>{!!$productDetail->pro_content!!}</p>
+                      </div>
+                    </div>
+                    <button class="SeeMore btn-success" data-toggle="collapse" href="#collapseTwo" style="margin-left: 39%; margin-bottom: 72px; margin-top: 24px;"><b class="caret"></b> Xem chi tiết</button> 
                   </div>
                </div>
                <div class="component_rating" style="margin-bottom: 20px;">

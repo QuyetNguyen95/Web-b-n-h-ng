@@ -31,6 +31,7 @@ Route::get('bai-viet/{slug}-{id}','ArticleController@getDetailArticle')->name('g
 Route::prefix('shopping')->group(function(){
 	Route::get('/add/{id}','ShoppingCartController@addProduct')->name('add.shopping.cart');
 	Route::get('/danh-sach','ShoppingCartController@getListShoppingCart')->name('get.list.shopping.cart');
+	Route::get('/{id}/{idrow}/{qty}/{dk}','ShoppingCartController@getupdatecart')->name('get.quantity.cart');
 	Route::get('/delete/{id}','ShoppingCartController@deleteProductItem')->name('delete.shopping.cart');
 });
  //thanh toan gio hang

@@ -100,14 +100,14 @@
             <div class="col-md-4 col-sm-4 col-xs-12">
                <div class="single-post" style="margin-bottom: 40px;">
                   <div class="post-thumb">
-                     <a href="#">
+                     <a href="{{route('get.detail.article',[$articleNew->a_slug,$articleNew->id])}}">
                      <img src="{{pare_url_file($articleNew->a_avatar)}}" alt="" style="width: 370px; height: 280px;" />
                      </a>
                   </div>
                   <div class="post-thumb-info">
                      <div class="postexcerpt">
                         <p>{{$articleNew->a_name}}</p>
-                        <a href="#" class="read-more">Xem thêm</a>
+                        <a href="{{route('get.detail.article',[$articleNew->a_slug,$articleNew->id])}}" class="read-more">Xem thêm</a>
                      </div>
                   </div>
                </div>
