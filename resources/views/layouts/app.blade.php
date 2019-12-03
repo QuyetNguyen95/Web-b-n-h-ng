@@ -5,6 +5,11 @@
 <!--[if IE 8 ]>    <html lang="en" class="ie8">    <![endif]-->
 <!--[if IE 9 ]>    <html lang="en" class="ie9">    <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
+<style type="text/css">
+    #scrollUp{
+        bottom: 150px !important;
+    }
+</style>
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
@@ -105,6 +110,19 @@
         </div>
         @endif
        @yield('content')
+       <!--Start of Tawk.to Script-->
+        <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/5de62983d96992700fca7402/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        </script>
+<!--End of Tawk.to Script-->
        @include('components.footer')
         <script src="{{asset('js/vendor/jquery-1.11.3.min.js')}}"></script>
         
