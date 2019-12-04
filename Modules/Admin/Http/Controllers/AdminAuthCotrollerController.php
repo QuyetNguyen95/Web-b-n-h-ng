@@ -66,7 +66,7 @@ class AdminAuthCotrollerController extends Controller
     $authenticates->name = $request->names;
     $authenticates->email = $request->email;
     $authenticates->phone = $request->phone;
-    //dd($request->hasFile('avatars'));
+    $authenticates->password = bcrypt($request->password);
     if ($request->hasFile('avatar')) 
       {
         $file = upload_image('avatar');
