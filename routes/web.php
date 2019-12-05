@@ -15,6 +15,9 @@ Route::group(['namespace' => 'Auth'],function(){
 	//lay lai mat khau 
 	Route::get('/lay-lai-mat-khau','ForgotPasswordController@getFormResetPassword')->name('get.reset.password');
 	Route::post('/lay-lai-mat-khau','ForgotPasswordController@sendCodeResetPassword');
+	Route::get('/password/reset','ForgotPasswordController@resetPassword')->name('get.link.reset.password');
+	Route::get('/password/reset','ForgotPasswordController@resetPassword')->name('get.link.reset.password');
+	Route::post('/password/reset','ForgotPasswordController@saveResetPassword');
 });
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('danh-muc/{slug}-{id}','CategoryController@getListProduct')->name('get.list.product');

@@ -107,7 +107,7 @@
         @if(Session::has('danger'))
         <div class="alert alert-danger alert-dismissible" style="width: 40%; margin-right: : 20px; position: fixed; z-index: 3; margin-left: 809px;">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Thành công!</strong> {{Session::get('danger')}}
+            <strong>Thất bại!</strong> {{Session::get('danger')}}
         </div>
         @endif
        @yield('content')
@@ -117,30 +117,21 @@
       <div id="fb-root"></div>
      <!-- Load Facebook SDK for JavaScript -->
       <div id="fb-root"></div>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            xfbml            : true,
-            version          : 'v5.0'
-          });
-        };
-
-        (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-      <!-- Your customer chat code -->
-      <div class="fb-customerchat"
-        attribution=setup_tool
-        page_id="102334991256108"
-  logged_in_greeting="Xin chào! Chúng tôi có thể giúp gì cho bạn?"
-  logged_out_greeting="Xin chào! Chúng tôi có thể giúp gì cho bạn?">
-      </div>
-       @include('components.footer')
+      <!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+    <!--Start of Tawk.to Script-->
+        <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/5de944f543be710e1d20c186/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+        </script>
+<!--End of Tawk.to Script-->
         <script src="{{asset('js/vendor/jquery-1.11.3.min.js')}}"></script>
         
         <!-- bootstrap js

@@ -27,8 +27,8 @@
                     <form method="POST" action="" >
                         @csrf
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">Vui lòng cung cấp email để lấy lại mật khẩu</label>
-                            <div class="col-md-6">
+                            <label for="email" class="col-md-12 col-form-label text-md-right">Vui lòng cung cấp email để lấy lại mật khẩu</label>
+                            <div class="col-md-12">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))

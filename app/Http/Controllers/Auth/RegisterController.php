@@ -17,16 +17,25 @@ class RegisterController extends Controller
     }
    public function postRegister(Request $request)
    {
+       $users = User::select('email')->get();
+      foreach ($users as $userss) {
+        if($userss->email == $request->email)
+        {
+          return redirect()->route('get.register')->with('danger','Email của bạn đã được đăng ký');
+        }
+      }
        $user = new User();
        $user->name = $request->name;
        $user->email = $request->email;
        $user->phone = $request->phone;
        $user->password = bcrypt($request->password);
        $user->save();
+      
+       
        if($user->id)
        {
-       	return redirect()->route('get.login');
+       	return redirect()->route('get.login')->with('success','Đăng ký thành công');
        }
-       return redirect()->back();
+
    }
 }
