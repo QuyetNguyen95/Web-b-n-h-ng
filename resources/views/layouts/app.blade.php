@@ -132,6 +132,7 @@
         })();
         </script>
 <!--End of Tawk.to Script-->
+        @include('components.footer')
         <script src="{{asset('js/vendor/jquery-1.11.3.min.js')}}"></script>
         
         <!-- bootstrap js

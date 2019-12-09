@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Transaction;
+use App\User;
 use App\Models\Order;
 use Cart;
 use Carbon\Carbon;
+use Mail;
+use App\Mail\ProductPlaces;
 use Illuminate\Support\Facades\Input;
 class ShoppingCartController extends FrontendController
 {
@@ -102,7 +105,21 @@ class ShoppingCartController extends FrontendController
           ]);
            }
         }
+
+         //gui thong tin gio hang qua mail
+        $data = [
+           'address' => $request->address
+        ];
+        $email = $request->email;
+        $checkUser = User::where('email',$email)->first();
+        Mail::to($email)->send(new ProductPlaces($products,$data));
+
+         //xoa gio hang sau khi dat hang thanh cong
         Cart::destroy();
-        return redirect()->back()->with('alert', 'Mua hàng công, cảm ơn bạn đã mua hàng ở website chúng tôi!');;
+        
+       
+       // $url = route('get.link.reset.password',['code'=> $checkUser->code,'email'=>$email]);
+     
+        return redirect()->back()->with('alert', 'Mua hàng công, cảm ơn bạn đã mua hàng ở website chúng tôi,vui lòng kiểm tra email của bạn để biết chi tiết đơn hàng!');;
     }
 }
