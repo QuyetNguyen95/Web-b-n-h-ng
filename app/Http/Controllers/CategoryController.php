@@ -56,6 +56,44 @@ class CategoryController extends FrontendController
             }
         }
 
+        if($request->tag)
+        {
+            $tag = $request->tag;
+            switch ($tag) {
+                case 'nokia':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break;
+                
+                 case 'samsung':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break;
+                case 'iPhone':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break; 
+                case 'Xiaomi':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break;
+                 case 'iPad':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break;
+                case 'Huawei':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break; 
+                 case 'Mobell':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break;
+                case 'Lenovo':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break; 
+                case 'Acer':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break; 
+                case 'Asus':
+                    $products->where('pro_name','like','%'.$tag.'%');
+                    break;                                    
+            }
+        }
+
          if ($request->orderby) 
         {
             $orderby = $request->orderby;
@@ -80,7 +118,8 @@ class CategoryController extends FrontendController
 		$viewData = [
 			'products' => $products,
             'cateProduct' => $cateProduct,
-            'query'    => $request->query()
+            'query' =>$request->query()
+            //$request->query() retrieve all of the query string values as an associative array
 		];
 		return view('product.index',$viewData);
  	}

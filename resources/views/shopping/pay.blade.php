@@ -35,8 +35,7 @@
                      @foreach($products as $product)
                       <div class="form-group">
                           <div class="col-sm-3 col-xs-3">
-                              <img class="img-responsive" src="
-                              {{pare_url_file($product->options->avatar)}}" style="width: 100px; height: 70px;" />
+                              <img class="img-responsive" src="{{pare_url_file($product->options->avatar)}}" style="width: 100px; height: 70px;" />
                           </div>
                           <div class="col-sm-6 col-xs-6">
                               <div class="col-xs-12">{{$product->name}}</div>
@@ -103,12 +102,5 @@
    </div>
 </div>
 @stop
-<script>
-    var msg = '{{Session::get('alert')}}';
-    var exist = '{{Session::has('alert')}}';
-    if(exist){
-      alert(msg);
-    }
-  </script>
 
 {{-- get_data_user la ham lay thong tin cua nguoi da dang nhap --}}

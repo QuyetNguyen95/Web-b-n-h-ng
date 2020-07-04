@@ -8,7 +8,7 @@
    .product-tab-content h2 {font-size: 24px !important}
    .product-tab-content h3 {font-size: 24px !important}
    .product-tab-content h4 {font-size: 24px !important}
-   .product-tab-content img 
+   .product-tab-content img
    {
       margin: 0 auto;
       text-align: center;
@@ -96,13 +96,13 @@
                   <div class="product-content">
                      <h1 class="product-name"><a href="#">{{$productDetail->pro_name}}</a></h1>
                      <div class="rating-price">
-                       <?php 
+                       <?php
                             $ageDetail = 0;
                             if ($productDetail->pro_total_rating)
                              {
                                 $ageDetail = round($productDetail->pro_total_number/$productDetail->pro_total_rating,2);
                             }
-                        ?> 
+                        ?>
                         <div class="pro-rating">
                           @for($i=1;$i<=5;$i++)
                            <a href="#"><i class="fa fa-star {{$i <= $ageDetail ? 'active' : ''}}"></i></a>
@@ -131,7 +131,7 @@
                               </div>
                               <div class="compare-button">
                                  <a href="#" data-toggle="tooltip" title="" data-original-title="Compare"><i class="fa fa-refresh"></i></a>
-                              </div>                           
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -146,11 +146,12 @@
                <div role="tabpanel" class="tab-pane active" id="home">
                   <div class="product-tab-content">
                      <div id="collapseTwo" class="accordion-body collapse">
-                      <div class="accordion-inner">                        
+                      <div class="accordion-inner">
                           <p>{!!$productDetail->pro_content!!}</p>
                       </div>
                     </div>
-                    <button class="SeeMore btn-success" data-toggle="collapse" href="#collapseTwo" style="margin-left: 39%; margin-bottom: 72px; margin-top: 24px;"><b class="caret"></b> Xem chi tiết</button> 
+                    <button class="SeeMore btn btn-success" data-toggle="collapse" href="#collapseTwo"
+                     style="margin-left: 39%; margin-bottom: 72px; margin-top: 24px;"><b class="caret"></b> Xem chi tiết</button>
                   </div>
                </div>
                <div class="component_rating" style="margin-bottom: 20px;">
@@ -163,6 +164,8 @@
                         @foreach($arrayRatings as $key => $arrayRating)
                         <?php
                           $itemAvg = round(($arrayRating['total']/$productDetail->pro_total_rating)*100);
+                          //$arrayRating['total'] tổng số lượt đánh giá của từng sao
+                          //$productDetail->pro_total_rating tổng số lượt đánh giá của toàn sao
                         ?>
                         <div class="item_rating" style="display: flex; align-items: center;">
                               <div style="width: 10%; font-size: 14px;">
@@ -212,19 +215,19 @@
                           <p style="margin-bottom: 0;">
                             <span class="pro-rating">
                               @for($i=1;$i<=5;$i++)
-                                <i class="fa fa-star {{$i <= $rating->ra_number ? 'active' : ''}}"></i> 
+                                <i class="fa fa-star {{$i <= $rating->ra_number ? 'active' : ''}}"></i>
                               @endfor
                             </span>
-                             <span>{{$rating->ra_content}}</span> 
+                             <span>{{$rating->ra_content}}</span>
                           </p>
-                          <div> 
+                          <div>
                             <span><i class="fa fa-clock-o"></i> {{$rating->created_at}}</span>
                           </div>
                         </div>
                       @endforeach
                     @endif
               </div>
-            </div>               
+            </div>
          </div>
       </div>
    </div>
@@ -232,14 +235,23 @@
 @stop
 @section('script')
    <script>
-
+      //PHẦN ĐÁNH GIÁ SẢN PHẨM
       $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              //token thêm ở header dưới dạng meta
           }
       });
+
+      //hàm chọn sao đánh giá
       $(function(){
          let listStar = $(".list_star .fa");
+        //   listStar là một object jQuery
+        //  { 0: i.fa.fa-star
+        //   1: i.fa.fa-star
+        //   2: i.fa.fa-star
+        //   3: i.fa.fa-star
+        //   4: i.fa.fa-star}
          listRatingText = {
                1 : 'Không thích',
                2 : 'Tạm được',
@@ -249,19 +261,20 @@
          };
          listStar.mouseover(function(){
             let $this = $(this);
-            let number = $this.attr('data-key');
-            listStar.removeClass('rating_active');
+            let number = $this.attr('data-key');//lấy số sao từ data-key
+            listStar.removeClass('rating_active');//ẩn class rating_active
 
-            $(".number_rating").val(number);
+            $(".number_rating").val(number);//set number_rating == number
             $.each(listStar, function(key,value){
                if (key+1<= number)
                 {
-                  $(this).addClass('rating_active');
+                  $(this).addClass('rating_active');//thêm class rating_active
                 }
             });
-            $(".list_text").text('').text(listRatingText[number]).show();
+            $(".list_text").text('').text(listRatingText[number]).show();//show list_text
          });
 
+         //hàm ẩn hiện form đánh giá
          $(".js_rating_action").click(function(event){
             event.preventDefault();
             if ($(".form_rating").hasClass('hide'))
@@ -272,6 +285,8 @@
                $(".form_rating").addClass('hide').removeClass('active')
              }
          })
+
+         //Hàm gửi đánh giá vào database bằng ajax
 
          $(".js_rating_product").click(function(event){
             event.preventDefault();
@@ -291,12 +306,15 @@
                     if (result.code == 1 )
                      {
                         alert("Gửi đánh giá thành công");
-                        location.reload();
+                        location.reload();//tải lại trang
                      }
                   });
             }
          })
 
+
+         //PHẦN LÂY SẢN PHẨM VỪA XEM
+         //láy sản phẩm vừa xem show ra giao diện chính
          //ưu id sản phẩm vào storage
 
         let idProduct = $("#content_product").attr('data-id');
@@ -304,7 +322,7 @@
         //lấy giá trị storage
 
          let products = localStorage.getItem('products');
-        
+
          if (products == null)
           {
             arrayProduct = new Array();

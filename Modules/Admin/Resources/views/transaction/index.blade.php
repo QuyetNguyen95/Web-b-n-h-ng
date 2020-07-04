@@ -23,9 +23,10 @@
             </tr>
         </thead>
         <tbody>
+             <?php $stt=1; ?>
            @foreach($transactions as $transaction)
             <tr>
-                <td>#{{$transaction->id}}</td>
+                <td>{{$stt}}</td>
                 <td>{{isset($transaction->user->name) ? $transaction->user->name : '[N\A]'}}
                 </td>
                 <td>{{$transaction->tr_address}}</td>
@@ -44,9 +45,11 @@
                         <a class="btn_customer_action js_order_item" data-id="{{$transaction->id}}" href="{{route('admin.get.view.order',$transaction->id)}}" style="padding: 5px 10px;border: 1px solid #999; font-size: 12px;"><i class="fas fa-eye"></i></a>
                 </td>
             </tr>
+             <?php $stt++; ?>
            @endforeach
         </tbody>
     </table>
+    {{$transactions->links()}}
 </div>
 <div class="modal fade" id="myModalOrder" role="dialog">
     <div class="modal-dialog  modal-lg">
@@ -58,7 +61,7 @@
           <h4 class="modal-title">Chi tiết mã đơn hàng #<b class="transaction_id"></b> </h4>
         </div>
         <div class="modal-body" id="md_content">
-         
+             <!--  content-->
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
@@ -74,17 +77,17 @@
             $(".js_order_item").click(function(event){
                 event.preventDefault();
                 let $this = $(this);
-                let url = $this.attr('href');
-                $('#md_content').html('')
-                $(".transaction_id").text('').text($this.attr('data-id'));
-                $("#myModalOrder").modal('show');
+                let url = $this.attr('href');//lay url cua tung don hang
+                $('#md_content').html('');//sau khi tra ve result thi set result bang ''
+                $(".transaction_id").text('').text($this.attr('data-id'));//set ma don hang cua transaction
+                $("#myModalOrder").modal('show');//show modal
 
                 $.ajax({
                       url: url,
                 }).done(function(result) {
                         if (result)
                         {
-                            $('#md_content').append(result);
+                            $('#md_content').append(result);//sau khi xu ly thanh cong se tra ve result dang json tu ham viewOrder cua TransactionController
                         }
 
                     });    

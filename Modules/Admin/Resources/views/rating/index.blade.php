@@ -21,10 +21,11 @@
             </tr>
         </thead>
         <tbody>
+             <?php $stt=1; ?>
             @if(isset($ratings))
                 @foreach($ratings as $rating)
                 <tr>
-                    <td>{{$rating->id}}</td>
+                    <td>{{$stt}}</td>
                     <td>
                         {{isset($rating->user->name) ? $rating->user->name : 'N\A'}}
                     </td>
@@ -43,6 +44,7 @@
                         <a style="padding: 5px 10px;border: 1px solid #999; font-size: 12px;" href="{{route('admin.action.rating',['delete',$rating->id])}}"><i class="fas fa-trash-alt" style="font-size: 11px;"></i> Xóa</a>
                     </td>
                 </tr>
+                 <?php $stt++; ?>
                 @endforeach
             @endif
         </tbody>

@@ -13,10 +13,8 @@
 Route::group(['prefix' =>'authenticate'],function(){
   Route::get('/login','AdminAuthCotrollerController@getLogin')->name('admin.login');
    Route::post('/login','AdminAuthCotrollerController@postLogin');
-   Route::get('/logout','AdminAuthCotrollerController@logoutAdmin')->name('admin.logout');
-   Route::get('/','AdminAuthCotrollerController@index')->name('admin.get.list.authenticate');
-   Route::get('/create','AdminAuthCotrollerController@create')->name('admin.get.create.authenticate');
-   Route::post('/create','AdminAuthCotrollerController@store');
+  
+   
    Route::get('/update/{id}','AdminAuthCotrollerController@edit')->name('admin.get.edit.authenticate');
    Route::post('/update/{id}','AdminAuthCotrollerController@update');
    Route::get('/password','AdminAuthCotrollerController@updatePasswordAdmin')->name('admin.get.update.password.authenticate');
@@ -26,6 +24,16 @@ Route::group(['prefix' =>'authenticate'],function(){
 
 Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function() {
     Route::get('/', 'AdminController@index')->name('admin.home');
+
+
+
+    Route::group(['prefix' => 'controllerAdmin'], function() {
+        Route::get('/create','AdminAuthCotrollerController@create')->name('admin.get.create.authenticate');
+        Route::post('/create','AdminAuthCotrollerController@store');
+        Route::get('/logout','AdminAuthCotrollerController@logoutAdmin')->name('admin.logout');
+        Route::get('/','AdminAuthCotrollerController@index')->name('admin.get.list.authenticate');
+    });
+
 
 
     Route::group(['prefix' => 'category'],function(){
@@ -86,7 +94,7 @@ Route::prefix('admin')->middleware('CheckLoginAdmin')->group(function() {
         Route::post('/create','AdminPageStaticController@store');
         Route::get('/update/{id}','AdminPageStaticController@edit')->name('admin.get.edit.page_static');
         Route::post('/update/{id}','AdminPageStaticController@update');
-    }); 
+    });
        //kho hang
       Route::group(['prefix' => 'warehouse'],function(){
           Route::get('/','AdminWarehouseController@getWarehouseProduct')->name('admin.get.warehouse.list');

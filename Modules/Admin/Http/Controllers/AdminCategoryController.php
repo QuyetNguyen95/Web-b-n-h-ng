@@ -64,6 +64,7 @@ class AdminCategoryController extends Controller
     				break;
                 case 'home':
                     $category->c_home = $category->c_home == 1 ? 0 : 1;
+                    //$category->c_home = 1 or 0
                     $messages = 'Cập nhật thành công';
                     $category->save();
                     break;

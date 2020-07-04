@@ -22,6 +22,7 @@ class ArticleController extends FrontendController
         // tra ve mot mang cua url o segment thu 2
         //request->segment($segmentId): trả về segment có id chỉ định
         // /i Tìm kiếm không phân biệt hoa thường.
+        //vi du link: http://laravel56.abc/bai-viet/cong-nghe-ray-tracing-10 thi segment(2) se lay cong-nghe-ray-tracing-10 
         $id = array_pop($arrayUrl);
         //Hàm array_pop() sẽ loại bỏ phần tử cuối cùng của mảng truyền vào. trả về phần tử bị loại bỏ.
         if ($id) {

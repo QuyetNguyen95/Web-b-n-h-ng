@@ -12,7 +12,7 @@ Route::group(['namespace' => 'Auth'],function(){
 	Route::post('dang-nhap','LoginController@postLogin')->name('post.login');
 	//dang xuat
 	Route::get('dang-xuat','LoginController@postLogout')->name('get.logout.user');
-	//lay lai mat khau 
+	//lay lai mat khau
 	Route::get('/lay-lai-mat-khau','ForgotPasswordController@getFormResetPassword')->name('get.reset.password');
 	Route::post('/lay-lai-mat-khau','ForgotPasswordController@sendCodeResetPassword');
 	Route::get('/password/reset','ForgotPasswordController@resetPassword')->name('get.link.reset.password');
@@ -35,6 +35,7 @@ Route::prefix('shopping')->group(function(){
 	Route::get('/add/{id}','ShoppingCartController@addProduct')->name('add.shopping.cart');
 	Route::get('/danh-sach','ShoppingCartController@getListShoppingCart')->name('get.list.shopping.cart');
 	Route::get('/{id}/{idrow}/{qty}/{dk}','ShoppingCartController@getupdatecart')->name('get.quantity.cart');
+	Route::post('/{id}/{idrow}/{qty}/{dk}','ShoppingCartController@getupdatecart');
 	Route::get('/delete/{id}','ShoppingCartController@deleteProductItem')->name('delete.shopping.cart');
 });
  //thanh toan gio hang

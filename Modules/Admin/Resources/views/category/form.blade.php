@@ -11,6 +11,7 @@
 		    </div>
 		    <div class="form-group">
 		      <label for="name">Icon</label>
+		       {{-- if you need add/edit data form (when you need to use edit form for add and edit in edit mode you need to use loaded data from model (database)) to show values from the model (through controller) you can use following OLD  --}}
 		      <input type="text" class="form-control" id="email" placeholder="fa fa-home" value="{{old('icon',isset($category->c_icon) ? $category->c_icon : '')}}" name="icon">
 		       @if($errors->has('icon'))
         			<span class="error-text">

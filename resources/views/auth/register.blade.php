@@ -30,18 +30,38 @@
                                 <p class="form-row form-row-wide">
                                     <label for="username">Họ tên <span class="required">*</span></label>
                                     <input type="text" class="input-text" name="name" id="name" value="">
+                                    @if($errors->has('name'))
+                                        <div class="error-text">
+                                            {{$errors->first('name')}}
+                                        </div>
+                                    @endif
                                 </p>
                                  <p class="form-row form-row-wide">
                                     <label for="username">Email <span class="required">*</span></label>
                                     <input type="text" class="input-text" name="email" id="email" value="">
+                                    @if($errors->has('email'))
+                                        <div class="error-text">
+                                            {{$errors->first('email')}}
+                                        </div>
+                                    @endif
                                 </p>
                                  <p class="form-row form-row-wide">
                                     <label for="username">Số điện thoại <span class="required">*</span></label>
                                     <input type="text" class="input-text" name="phone" id="phone" value="">
+                                    @if($errors->has('phone'))
+                                        <div class="error-text">
+                                            {{$errors->first('phone')}}
+                                        </div>
+                                    @endif
                                 </p>
                                 <p class="form-row form-row-wide">
                                     <label for="password">Password <span class="required">*</span></label>
                                     <input class="input-text" type="password" name="password" id="password">
+                                    @if($errors->has('password'))
+                                        <div class="error-text">
+                                            {{$errors->first('password')}}
+                                        </div>
+                                    @endif
                                 </p>
                             </div>
                             <div class="form-action">

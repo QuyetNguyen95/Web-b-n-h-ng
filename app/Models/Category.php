@@ -34,6 +34,7 @@ class Category extends Model
     public function getStatus()
     {
     	return array_get($this->status,$this->c_active,'[N\A]');
+        //array_get lấy giá trị từ mảng con sâu bên trong  có nghĩa là từ mảng cha $status có hai mảng con 1 và không. hàm array_get lấy giá trị của 1 hoặc 0.
     }
     public function getHome()
     {

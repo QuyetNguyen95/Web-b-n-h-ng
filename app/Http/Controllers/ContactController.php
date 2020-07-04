@@ -17,6 +17,8 @@ class ContactController extends FrontendController
     }
     public function saveContact(Request $request)
     {
+        //dung phuong phap Mass Assignment
+
     	$data = $request->except('_token');
     	$data['created_at'] = $data['updated_at'] = Carbon::now();
     	Contact::insert($data);

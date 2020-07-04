@@ -30,10 +30,12 @@ class HomeController extends FrontendController
                 'tr_user_id' => get_data_user('web'),
                 'tr_status'  => Transaction::STATUS_DONE
             ])->pluck('id');
-            // lay list id cua don hang
+
+            // pluck  lay list id cua don hang duoi dang mang [▼ 0 => 19 1 => 25 ]
             if (!empty($transactions)) {
                 $listID = Order::whereIn('or_transaction_id',$transactions)->distinct()->pluck('or_product_id');
                 //lay list id cua san pham
+                //distinct() tra ve ket qua khong trung lap
                 if (!empty($listID)) {
                     $listIdCategory = Product::whereIn('id',$listID)->distinct()->pluck('pro_category_id');
                     //lay list id cua danh muc

@@ -51,6 +51,7 @@
             </tr>
         </thead>
         <tbody>
+             <?php $stt=1; ?>
             @if(isset($products))
                 @foreach($products as $product)
                 <?php 
@@ -61,7 +62,7 @@
                     }
                 ?>
                 <tr>
-                    <td>{{$product->id}}</td>
+                    <td>{{$stt}}</td>
                     <td>
                         {{$product->pro_name}}
                         <ul style="padding-left: 15px; list-style-type: none;">
@@ -96,6 +97,7 @@
                         <a style="padding: 5px 10px;border: 1px solid #999; font-size: 12px;" href="{{route('admin.get.action.product',['delete',$product->id])}}"><i class="fas fa-trash-alt" style="font-size: 11px;"></i> Xóa</a>
                     </td>
                 </tr>
+                 <?php $stt++; ?>
                 @endforeach
             @endif
         </tbody>

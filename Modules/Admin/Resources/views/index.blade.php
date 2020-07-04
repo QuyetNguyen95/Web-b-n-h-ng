@@ -35,7 +35,6 @@
                 <th>Tên khách hàng</th>
                 <th>Số điện thoại</th>
                 <th>Tổng tiền</th>
-                <th>Trạng thái</th>
                 <th>Time</th>
             </tr>
         </thead>
@@ -47,9 +46,6 @@
                 </td>
                 <td>{{$transactionNew->tr_phone}}</td>
                 <td>{{number_format($transactionNew->tr_total,0,',','.')}} VNĐ</td>
-                <td>
-                    <a href="{{route('admin.action.transaction',['active',$transactionNew->id])}}" class="label {{$transactionNew->getStatus($transactionNew->tr_status)['class']}}">{{$transactionNew->getStatus($transactionNew->tr_status)['name']}}</a>
-                </td>
                 <td>{{$transactionNew->created_at->format('d-m-Y')}}</td>
             </tr>
            @endforeach
@@ -68,7 +64,6 @@
                         <th>Tiêu đề</th>
                         <th>Họ tên</th>
                         <th>Nội dung</th>
-                        <th style="width: 100px">Trạng thái</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,9 +77,6 @@
                             </td>
                             <td>
                                {{$contact->c_content}}
-                            </td>
-                            <td>
-                                <a href="{{route('admin.action.contact',['active',$contact->id])}}" class="label {{$contact->getStatus($contact->c_status)['class']}}">{{$contact->getStatus($contact->c_status)['name']}}</a>
                             </td>
                         </tr>
                         @endforeach

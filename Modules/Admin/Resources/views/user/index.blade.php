@@ -21,10 +21,11 @@
             </tr>
         </thead>
         <tbody>
+             <?php $stt=1; ?>
             @if(isset($users))
                 @foreach($users as $user)
                 <tr>
-                    <td>{{$user->id}}</td>
+                    <td>{{$stt}}</td>
                     <td>
                         {{$user->name}}
                     </td>
@@ -42,6 +43,7 @@
                         <a style="padding: 5px 10px;border: 1px solid #999; font-size: 12px;" href="{{route('admin.action.user',['delete',$user->id])}}"><i class="fas fa-trash-alt" style="font-size: 11px;"></i> Xóa</a>
                     </td>
                 </tr>
+                 <?php $stt++; ?>
                 @endforeach
             @endif
         </tbody>

@@ -21,10 +21,11 @@
             </tr>
         </thead>
         <tbody>
+             <?php $stt=1; ?>
             @if(isset($authenticates))
                 @foreach($authenticates as $authenticate)
                     <tr>
-                        <td>{{$authenticate->id}}</td>
+                        <td>{{$stt}}</td>
                         <td>{{$authenticate->name}}</td>
                         <td>
                              <img src="{{pare_url_file($authenticate->avatar)}}" class="img img-responsive" style="width: 80px; height: 80px;" alt="">
@@ -36,6 +37,7 @@
                             <a style="padding: 5px 10px;border: 1px solid #999; font-size: 12px;" href="{{route('admin.get.action.authenticate',['delete',$authenticate->id])}}"><i class="fas fa-trash-alt" style="font-size: 11px;"></i> Xóa</a>
                         </td>
                     </tr>
+                <?php $stt++; ?>
                 @endforeach
             @endif
         </tbody>

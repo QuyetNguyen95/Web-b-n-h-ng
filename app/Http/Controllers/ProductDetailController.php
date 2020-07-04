@@ -22,31 +22,37 @@ class ProductDetailController extends FrontendController
 
             $ratings =Rating::with('user:id,name')->where('ra_product_id',$id)->orderBy('id','DESC')->paginate(10);
             //gom nhóm lại tổng xem
-            $ratingsDashboard = Rating::groupBy('ra_number')->where('ra_product_id',$id)->select(DB::raw('count(ra_number) as total'),DB::raw('sum(ra_number) as sum'))->addSelect('ra_number')->get()->toArray();
+            $ratingsDashboard = Rating::groupBy('ra_number')->where('ra_product_id',$id)
+            ->select(DB::raw('count(ra_number) as total'),DB::raw('sum(ra_number) as sum'))
+            ->addSelect('ra_number')->get()->toArray();
+
             //total tong so luot danh gia
-            //sum tong so sao 
+            //sum tong so sao
+            //khai báo một mảng rỗng
             $arrayRatings = [];
 
             if(!empty($ratingsDashboard))
             {
                 for ($i=1; $i <=5  ; $i++)
-                 { 
+                 {
                    $arrayRatings[$i] = [
                     "total" => 0,
                     "sum" => 0,
                     "ra_number"=>0
-                   ];
-
-                   foreach ($ratingsDashboard as $item) 
+                   ];// set các giá trị cho mảng
+                   //Thêm các các thông số của mảng ratingDashBoard vào mảng arrayRating
+                   foreach ($ratingsDashboard as $item)
                    {
-                       if ($item['ra_number'] == $i) 
+                       if ($item['ra_number'] == $i)
                        {
                            $arrayRatings[$i] = $item;
                            continue;
                        }
                    }
 
+
                 }
+                //xuất mảng ra màn trang detail
             }
     		$viewData = [
     			'productDetail' => $productDetail,

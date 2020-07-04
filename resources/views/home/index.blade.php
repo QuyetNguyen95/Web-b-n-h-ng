@@ -31,7 +31,7 @@
                               <!-- single-product start -->
                               <div class="single-product first-sale" >
                                  <div class="product-img" >
-                                    @if($productHot->pro_number == 0)
+                                    @if($productHot->pro_number <= 0)
                                        <span style="position: absolute; background: #f28902; color: white; padding: 2px 6px; border-radius: 5px; font-size: 10px; z-index: 2;">Tạm hết hàng</span>
                                     @endif
                                     @if($productHot->pro_sale >0)
@@ -136,13 +136,13 @@
             @if(isset($categoriHome->products))
                <div class="block-carousel">
                   @foreach($categoriHome->products as $product)
-                      <?php 
+                      <?php
                          $ageDetail = 0;
                          if ($product->pro_total_rating)
                           {
                              $ageDetail = round($product->pro_total_number/$product->pro_total_rating,2);
                          }
-                     ?> 
+                     ?>
                      <div class="block-content">
                         <!-- single block start -->
                         <div class="single-block">
@@ -150,9 +150,9 @@
                               <a href="{{route('get.detail.product',[$product->pro_slug,$product->id])}}"><img src="{{pare_url_file($product->pro_avatar)}}" style="width: 170px; height: 200px;" alt="" /></a>
                            </div>
                            <div class="category-info">
-                              <h3><a href="{{route('get.detail.product',[$product->pro_slug,$product->id])}}">{{$product->pro_name}}</a></h3>
-                              <p>{{$product->pro_description}}</p>
-                              <div class="cat-price">{{number_format($product->pro_price,0,',','.')}} đ <span class="old-price">{{number_format($product->pro_price,0,',','.')}} đ </span></div>
+                              <h3 style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden"><a href="{{route('get.detail.product',[$product->pro_slug,$product->id])}}">{{$product->pro_name}}</a></h3>
+                              <p style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden">{{$product->pro_description}}</p>
+                              <div class="cat-price">{{number_format($product->pro_price,0,',','.')}} đ <span class="old-price">{{number_format($product->pro_price*(1-$product->pro_sale/100),0,',','.')}} đ </span></div>
                               <div class="cat-rating">
                                  @for($i=1;$i<=5;$i++)
                                     <a href="#"><i class="fa fa-star {{$i <= $ageDetail ? 'active' : ''}}"></i></a>
@@ -237,7 +237,7 @@
                 if (products.length > 0)
                  {
                      $.ajax({
-                           url: routeRenderProduct,//gửi ajax đến ham renderProductView o HomeController 
+                           url: routeRenderProduct,//gửi ajax đến ham renderProductView o HomeController
                            method : "POST",
                            data : {id : products},//danh sach cac id se duoc gui di
                            success : function(result)
@@ -254,3 +254,10 @@
       })
    </script>
 @stop
+<script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+      alert(msg);
+    }
+  </script>

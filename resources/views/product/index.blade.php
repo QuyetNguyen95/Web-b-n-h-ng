@@ -60,21 +60,44 @@
                      <div class="bar-ping"><img src="{{asset('img/bar-ping.png')}}" alt=""></div>
                      <h2>Tags</h2>
                   </div>
-                  <div class="exp-tags">
+                  @if(isset($cateProduct->id) && $cateProduct->id == 2)
+                     <div class="exp-tags">
                      <div class="tags">
-                        <a href="#">Nokia</a>
-                        <a href="#">Samsum</a>
-                        <a href="#">Giá rẻ</a>
-                        <a href="#">Hàng củ</a>
-                        <a href="#">Iphone</a>
+                        <a  class="btn {{Request::get('tag') == 'nokia' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'nokia'])}}">Nokia</a>
+                        <a  class="btn {{Request::get('tag') == 'samsung' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'samsung'])}}">Samsung</a>
+                        <a class="btn {{Request::get('tag') == 'iPhone' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'iPhone'])}}">IPhone</a>
+                        <a  class="btn {{Request::get('tag') == 'Xiaomi' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'Xiaomi'])}}">Xiaomi</a>
                      </div>
                   </div>
+                  @elseif(isset($cateProduct->id) && $cateProduct->id == 1)
+                     <div class="exp-tags">
+                     <div class="tags">
+                        <a  class="btn {{Request::get('tag') == 'iPad' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'iPad'])}}">IPad</a>
+                        <a  class="btn {{Request::get('tag') == 'samsung' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'samsung'])}}">Samsung</a>
+                        <a class="btn {{Request::get('tag') == 'Huawei' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'Huawei'])}}">Huawei</a>
+                        <a  class="btn {{Request::get('tag') == 'Mobell' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'Mobell'])}}">Mobell</a>
+                     </div>
+                  </div>
+                  @elseif(isset($cateProduct->id) && $cateProduct->id == 9)
+                     <div class="exp-tags">
+                     <div class="tags">
+                        <a  class="btn {{Request::get('tag') == 'Lenovo' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'Lenovo'])}}">Lenovo</a>
+                        <a  class="btn {{Request::get('tag') == 'Asus' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'Asus '])}}">Asus</a>
+                        <a class="btn {{Request::get('tag') == 'Acer' ? 'btn-info' : ''}}" href="{{request()->fullUrlWithQuery(['tag' => 'Acer'])}}">Acer</a>
+                     </div>
+                  </div>
+                  @endif
                </aside>
             </div>
          </div>
          <!-- left sidebar end -->
          <!-- right sidebar start -->
          <div class="col-md-9 col-sm-12 col-xs-12">
+             <div>
+               @if(isset($cateProduct->c_slug))
+                  <a href="{{route('get.list.product',[$cateProduct->c_slug,$cateProduct->id])}}" style="font-size: 20px">Sản phẩm nổi bật</a>
+               @endif
+            </div>
             <!-- shop toolbar start -->
             <div class="shop-content-area">
                <div class="shop-toolbar">
@@ -180,9 +203,9 @@
          <div class="brand-carousel">
             <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg1-brand.jpg')}}" alt="" /></a></div>
             <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg2-brand.jpg')}}" alt="" /></a></div>
-		    <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg3-brand.jpg')}}" alt="" /></a></div>
+          <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg3-brand.jpg')}}" alt="" /></a></div>
             <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg4-brand.jpg')}}" alt="" /></a></div>
-	        <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg5-brand.jpg')}}" alt="" /></a></div>
+           <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg5-brand.jpg')}}" alt="" /></a></div>
             <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg2-brand.jpg')}}" alt="" /></a></div>
             <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg3-brand.jpg')}}" alt="" /></a></div>
             <div class="brand-item"><a href="#"><img src="{{asset('img/brand/bg4-brand.jpg')}}" alt="" /></a></div>

@@ -26,10 +26,11 @@ class ShoppingCartController extends FrontendController
         if ($product->pro_sale) {
             $price = $price*(100-$product->pro_sale)/100;
         }
-        if($product->pro_number == 0)
+        if($product->pro_number <= 0)
         {
             return redirect()->back()->with('warning','Sản phẩm đã hết hàng');
         }
+        //them san pham vao gio hang
     	Cart::add([
     		'id' => $id,
     		'name' => $product->pro_name,
@@ -38,34 +39,43 @@ class ShoppingCartController extends FrontendController
     		'options' => [
                 'avatar' => $product->pro_avatar,
                 'sale' => $product->pro_sale,
-                'price_old' => $product->pro_price
+                'price_old' => $product->pro_price,
             ]
     	]);
     	return redirect()->back()->with('success','Mua hàng thành công');
     }
+
+
     //danh sach gio hang
     public function getListShoppingCart(Request $requests)
     {
-        
     	$products = Cart::content();
     	return view('shopping.index',compact('products'));
     }
-     public function getupdatecart($id,$idrow,$qty,$dk)
+     public function getupdatecart($id,$idrow,$qty,$dk,Request $request)
     {
        $product = Product::select('pro_number')->find($id);
       if ($dk=='up' && $qty<$product->pro_number ) {
          $qt = $qty+1;
+        $products = Cart::content();
          Cart::update($idrow, $qt);
          return redirect()->back();
       } elseif ($dk=='down') {
          $qt = $qty-1;
+         $products = Cart::content();
          Cart::update($idrow, $qt);
          return redirect()->back();
-      } else {
+      }elseif($dk=='update' && $request->quantity <= $product->pro_number){
+
+        Cart::update($idrow, $request->quantity);
+
+        return redirect()->back();
+    } else {
          return redirect()->back()->with('warning','Sản phẩm đã hết hàng');
       }
     }
-    
+    //giam so luong cua san pham trong database
+
     //thanh toan gio hang
     public function getFormPay()
     {
@@ -84,24 +94,26 @@ class ShoppingCartController extends FrontendController
         $totalMoney = str_replace(',','',Cart::subtotal(0,3));
         $transactionId = Transaction::insertGetId([
             'tr_user_id' => get_data_user('web'),//mac dinh lay id
-            'tr_total' => $totalMoney,
-            'tr_note' => $request->note,
+            'tr_total'   => $totalMoney,
+            'tr_note'    => $request->note,
             'tr_address' =>$request->address,
-            'tr_phone' => $request->phone,
+            'tr_phone'   => $request->phone,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
-        if ($transactionId) 
+        if ($transactionId)
         {
            $products = Cart::content();
-           foreach ($products as $product) 
+           foreach ($products as $product)
            {
-                Order::insert([
+              Order::insert([
               'or_transaction_id' => $transactionId,
               'or_product_id' => $product->id,
               'or_qty' => $product->qty,
               'or_price' =>$product->options->price_old,
-              'or_sale' =>$product->options->sale 
+              'or_sale' =>$product->options->sale,
+              'created_at' => Carbon::now(),
+              'updated_at' => Carbon::now()
           ]);
            }
         }
@@ -116,10 +128,10 @@ class ShoppingCartController extends FrontendController
 
          //xoa gio hang sau khi dat hang thanh cong
         Cart::destroy();
-        
-       
+
+
        // $url = route('get.link.reset.password',['code'=> $checkUser->code,'email'=>$email]);
-     
-        return redirect()->back()->with('alert', 'Mua hàng công, cảm ơn bạn đã mua hàng ở website chúng tôi,vui lòng kiểm tra email của bạn để biết chi tiết đơn hàng!');;
+
+        return redirect('/')->with('alert', 'Mua hàng công, cảm ơn bạn đã mua hàng ở website chúng tôi,vui lòng kiểm tra email của bạn để biết chi tiết đơn hàng!');
     }
 }

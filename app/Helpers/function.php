@@ -110,7 +110,7 @@ return'/images/no-image.jpg';
 $explode = explode('__', $image);
 if (isset($explode[0])) {
 $time = str_replace('_', '/', $explode[0]);
-return '/uploads/'.$folder.'/' . date('Y/m/d', strtotime($time)) . '/' . $image;
+return '/uploads'.$folder.'/' . date('Y/m/d', strtotime($time)) . '/' . $image;
 }
 }
 }
@@ -120,15 +120,16 @@ return '/uploads/'.$folder.'/' . date('Y/m/d', strtotime($time)) . '/' . $image;
 // 	[0] => nam-thang-ngay
 // 	[1] => ten-cua-file-anh.duoimorong
 // )
-//strtotime() sẽ phân tích bất kỳ chuỗi thời gian bằng tiếng anh thành một số nguyên chính là timestamp của thời gian đó. 
-  
+//strtotime(time) để chuyển đổi dữ liệu ngày tháng về kiểu INT. vi du chuyen ngay thang thanh //output: 1487517353  
 
 //ham lay thong tin khi dang nhap  
 if (!function_exists('get_data_user'))
 {
 function get_data_user($type,$field = 'id')
 {
-return Auth::guard($type)->user() ? Auth::guard($type)->user()->$field : '';
+return Auth::guard($type)->user() ? Auth::guard($type)->user()->$field : '';// Auth::guard($type)->user()->$field return id cua user 
+
+//$field la gia tri can lay tu user(id,name,...)
 }
 }
 

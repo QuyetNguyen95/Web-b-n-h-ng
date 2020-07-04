@@ -21,12 +21,13 @@ class AdminTransactionController extends Controller
     }
     public function viewOrder(Request $request, $id)
     {
+        
     	if($request->ajax())
     	{
     		$orders = Order::with('product')->where('or_transaction_id',$id)->get();
     		$html = view('admin::components.order',compact('orders'))->render();
-
-    		return \response()->json($html);
+            //render() get laravel blade view as a string , tra ve dang html
+    		return \response()->json($html);//chuyen du lieu sang json
     	}
     }
     

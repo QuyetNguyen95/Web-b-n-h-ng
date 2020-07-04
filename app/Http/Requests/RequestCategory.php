@@ -25,6 +25,11 @@ class RequestCategory extends FormRequest
     {
         return [
             'name' => 'required|unique:categories,c_name,'.$this->id,
+            //Sử dụng unique rule theo cách bạn làm ở trên thì bạn cần cho Laravel biết muốn so sánh giá trị hiện tại với giá trị của column nào trong table. Nếu như bạn muốn kiểm tra tính duy nhất của giá trị của $input['name'] với giá trị của column name của các record có trong table categories
+            // unique:table,column,except,idColumn
+            // table: refers to the table name "users"
+            // column: refers the column name "email"
+            // except: I'm taking it as the id of the Model instance I want to exclude from the "unique" verification
             'icon' => 'required'
         ];
     }

@@ -73,7 +73,7 @@
 	      <input type="number" name="pro_number" placeholder="10" class="form-control" value="{{old('pro_number',isset($product->pro_number) ? $product->pro_number : '0')}}">
 	    </div>
 	    <div class="form-group">
-	      <img src="{{asset('images/no_image.png')}}" alt="" style="width: 300px; height: 300px;" id="output_img">
+	      <img src="{{isset($product->pro_avatar) ? pare_url_file($product->pro_avatar) : asset('images/no_image.png')}}" alt="" style="width: 300px; height: 300px;" id="output_img">
 	    </div>
 	    <div class="form-group">
 	      <label for="name">Avatar</label>

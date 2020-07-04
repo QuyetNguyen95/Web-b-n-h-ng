@@ -36,9 +36,12 @@
 	      <label for="name">Meta Description</label>
 	      <input type="text" class="form-control"  placeholder="Meta Description" name="a_description_seo" value="{{old('a_description_seo',isset($article->a_description_seo) ? $article->a_description_seo : '')}}">
 	    </div>
+	     <div class="form-group">
+	      <img src="{{isset($article->a_avatar) ? pare_url_file($article->a_avatar) : asset('images/no_image.png')}}" alt="" style="width: 300px; height: 300px;" id="output_img">
+	    </div>
 	    <div class="form-group">
 	      <label for="name">Avatar</label>
-	      <input type="file" name="avatar" class="form-control">
+	      <input type="file" name="avatar" class="form-control" id="input_img">
 	    </div>
 	    <button type="submit" class="btn btn-success">Lưu thông tin</button>
     </div>

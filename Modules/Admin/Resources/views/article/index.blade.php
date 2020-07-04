@@ -34,10 +34,11 @@
             </tr>
         </thead>
         <tbody>
+             <?php $stt=1; ?>
             @if(isset($articles))
                 @foreach($articles as $article)
                 <tr>
-                    <td>{{$article->id}}</td>
+                    <td>{{$stt}}</td>
                     <td>
                         {{$article->a_name}}
                     </td>
@@ -62,6 +63,7 @@
                         <a style="padding: 5px 10px;border: 1px solid #999; font-size: 12px;" href="{{route('admin.get.action.article',['delete',$article->id])}}"><i class="fas fa-trash-alt" style="font-size: 11px;"></i> Xóa</a>
                     </td>
                 </tr>
+                 <?php $stt++; ?>
                 @endforeach
             @endif
         </tbody>

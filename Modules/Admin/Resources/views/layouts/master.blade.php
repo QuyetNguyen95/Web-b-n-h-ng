@@ -47,24 +47,14 @@
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    @if(Session::has('success'))
-                    <div class="alert alert-success alert-dismissible" style="position: fixed; right: 20px; z-index: 999999;">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Thành công!</strong> {{Session::get('success')}}
-                    </div>
-                    @endif
-                    @if(Session::has('danger'))
-                    <div class="alert alert-danger alert-dismissible" style="position: fixed; right: 20px; z-index: 999999;">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Thành công!</strong> {{Session::get('danger')}}
-                    </div>    
-                    @endif
-                    @if(Session::has('info'))
-                    <div class="alert alert-info alert-dismissible" style="position: fixed; right: 20px; z-index: 9999999;">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Thành công!</strong> {{Session::get('info')}}
-                    </div> 
-                    @endif
+                    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                       @if(Session::has($msg))
+                        <div class="alert alert-{{$msg}} alert-dismissible" style="width: 40%; margin-right: : 20px; position: fixed;z-index: 99999; text-align: center;margin-top: -6px; margin-left: 507px;">
+                          <button type="button" class="close" data-dismiss="alert">&times;</button>
+                           {{Session::get($msg)}}
+                         </div>
+                       @endif
+                    @endforeach
                     @yield('content')
                 </div>
             </div>

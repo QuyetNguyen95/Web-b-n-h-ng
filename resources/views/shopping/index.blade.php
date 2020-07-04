@@ -13,14 +13,14 @@
 	        <th>Tên sản phẩm</th>
 	        <th>Hình ảnh</th>
 	        <th>Giá</th>
-	        <th>Số lượng</th>
+	        <th style="width: 215px">Số lượng</th>
 	        <th>Giảm giá</th>
 	        <th>Thành tiền</th>
 	        <th>Thao Tác</th>
 	      </tr>
 	    </thead>
 	    <tbody>
-	    	<?php $i = 1; ?>	
+	    	<?php $i = 1; ?>
 	    	@foreach($products as $key => $product)
 	      <tr>
 	      	<td>#{{$i}}</td>
@@ -29,16 +29,20 @@
 	        	<img src="{{pare_url_file($product->options->avatar)}}" alt="" style="height: 60px; width: 80px;">
 	        </td>
 	        <td>{{number_format($product->options->price_old,0,',','.')}}đ</td>
-	        <td class="text-center">  
-	        <div style="margin-left: -57px">                      
-              @if($product->qty > 1)
-              <a href="{{route('get.quantity.cart',[$product->id,$product->rowId,$product->qty,'down'])}}"><span class="glyphicon glyphicon-minus" style="color: green"></span></a> 
-              @else
-                <a href="#"><span class="glyphicon glyphicon-minus" style="color: green"></span></a> 
-              @endif
-              <input type="text" class="qty text-center" value=" {!!$product->qty!!}" style="width:30px; font-weight:bold; font-size:15px; color:blue;" > 
-            <a href="{{route('get.quantity.cart',[$product->id,$product->rowId,$product->qty,'up'])}}"><span class="glyphicon glyphicon-plus-sign" style="color: red;"></span></a>
-        	</div>
+	        <td class="text-center">
+	       		<form action="{{route('get.quantity.cart',[$product->id,$product->rowId,$product->qty,'update'])}}" method="post" class="form-inline">
+	       			@csrf
+	       			 <div style="margin-left: -57px">
+		              @if($product->qty > 1)
+		              <a href="{{route('get.quantity.cart',[$product->id,$product->rowId,$product->qty,'down'])}}"><span class="glyphicon glyphicon-minus" style="color: green"></span></a>
+		              @else
+		                <a href="#"><span class="glyphicon glyphicon-minus" style="color: green"></span></a>
+		              @endif
+		              <input type="text" class="qty text-center" value=" {!!$product->qty!!}" style="width:30px; font-weight:bold; font-size:15px; color:blue;" name="quantity" >
+		            <a href="{{route('get.quantity.cart',[$product->id,$product->rowId,$product->qty,'up'])}}"><span class="glyphicon glyphicon-plus-sign" style="color: red;"></span></a>
+		             <button class="btn btn-sm btn-success" style=" margin-left: 6px;"><span>Update</span></button>
+		        	</div>
+	       		</form>
           </td>
           	<td>{{$product->options->sale}} %</td>
 	        <td>{{number_format(($product->price*$product->qty),0,',','.')}}đ</td>
@@ -47,11 +51,11 @@
 	        	{{-- xoa theo key cua san pham --}}
 	        </td>
 	      </tr>
-	     <?php $i++; ?>	
+	     <?php $i++; ?>
 	    	@endforeach
 	    </tbody>
       </table>
       <h5 class="pull-right">Tổng tiền cần thanh toán :  {{ Cart::subtotal() }}      <a  style="margin-left: 30px" href="{{route('get.form.pay')}}" class="btn-success btn">Thanh toán</a></h5>
     </div>
-</div>      
+</div>
 @stop
